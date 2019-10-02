@@ -1,4 +1,6 @@
 from room import Room
+from player import Player
+import os
 
 # Declare all the rooms
 
@@ -39,13 +41,71 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 
-# Write a loop that:
-#
-# * Prints the current room name
-# * Prints the current description (the textwrap module might be useful here).
-# * Waits for user input and decides what to do.
-#
-# If the user enters a cardinal direction, attempt to move to the room there.
-# Print an error message if the movement isn't allowed.
-#
-# If the user enters "q", quit the game.
+end = 0
+
+player_name = input('Whats your name? ')
+player_age = input('How old are you? ')
+player_spec = input('What kind of adventurer are you? ')
+
+player_one = Player(player_name, player_age, player_spec, room['outside'])
+
+# player_one = Player("Kovthe", 22, "Bard", room['outside'], )
+
+print('Move between rooms by typing n/s/e/w')
+print('n = North / s = South / e = East / w = West')
+print('Press "q" to quit')
+
+while not end:
+    print(player_one.room.name)
+    print(player_one.room.desc)
+
+    # print(room[player_one.currentRoom].roomDesc())
+    # print(room[player_one.currentRoom].n_to)
+
+    movement = input('Which way would you like to go? >> ')
+
+    if movement == 'q':
+        end = 1
+    if movement == 'n':
+        os.system('cls||clear')
+        try:
+            player_one.changeRoom(
+                player_one.room.n_to)
+        except:
+            print('Please try again')
+    if movement == 's':
+        os.system('cls||clear')
+        try:
+            player_one.changeRoom(
+                player_one.room.s_to)
+        except:
+            print('Please try again')
+    if movement == 'w':
+        os.system('cls||clear')
+        try:
+            player_one.changeRoom(
+                player_one.room.w_to)
+        except:
+            print('Please try again')
+    if movement == 'e':
+        os.system('cls||clear')
+        try:
+            player_one.changeRoom(
+                player_one.room.e_to)
+        except:
+            print('Please try again')
+
+        # while True:
+        #     print(f"{player_one.room.name}")
+        #     print(f"{player_one.room.desc}")
+
+        # Write a loop that:
+        #
+        # * Prints the current room name
+        # * Prints the current description (the textwrap module might be useful here).
+        # * Waits for user input and decides what to do.
+        #
+        # If the user enters a cardinal direction, attempt to move to the room there.
+        # Print an error message if the movement isn't allowed.
+        #
+        # If the user enters "q", quit the game.
